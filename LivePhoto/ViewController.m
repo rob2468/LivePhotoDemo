@@ -45,13 +45,13 @@
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info
 {
     PHLivePhoto *photo = [info objectForKey:UIImagePickerControllerLivePhoto];
-    if (!photo) {
-        return;
+    if (photo != nil)
+    {
+        // create a Live Photo View
+        PHLivePhotoView *photoView = [[PHLivePhotoView alloc] initWithFrame:CGRectMake(0, 100, 320, 200)];
+        photoView.livePhoto = photo;
+        [self.view addSubview:photoView];
     }
-    // create a Live Photo View
-    PHLivePhotoView *photoView = [[PHLivePhotoView alloc] initWithFrame:CGRectMake(0, 100, 320, 200)];
-    photoView.livePhoto = photo;
-    [self.view addSubview:photoView];
     
     [self dismissViewControllerAnimated:picker completion:^{
         
